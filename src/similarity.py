@@ -12,7 +12,7 @@ class Similarity:
 
     def clean_text(self, text):
         # Remove pontuações e converte para minúsculas
-        return re.sub(r'[^\w\s]', '', text.lower().strip())
+        return re.sub(r"[^\w\s]", "", text.lower().strip())
 
     def get_levenshtein_similarity(self, text_a, text_b):
         return difflib.SequenceMatcher(None, text_a, text_b).ratio()
@@ -35,20 +35,14 @@ class Similarity:
         cleaned_text_a = self.clean_text(text_a)
         cleaned_text_b = self.clean_text(text_b)
 
-        similaridade_1 = self.get_levenshtein_similarity(
-            cleaned_text_a, cleaned_text_b
-        )
+        similaridade_1 = self.get_levenshtein_similarity(cleaned_text_a, cleaned_text_b)
 
         self.levenshtein[model_name] = similaridade_1 * 100
 
-        similaridade_2 = self.get_jaccard_similarity(
-            cleaned_text_a, cleaned_text_b
-        )
+        similaridade_2 = self.get_jaccard_similarity(cleaned_text_a, cleaned_text_b)
 
         self.jaccard[model_name] = similaridade_2 * 100
 
-        similaridade_3 = self.get_tfidf_similarity(
-            cleaned_text_a, cleaned_text_b
-        )
+        similaridade_3 = self.get_tfidf_similarity(cleaned_text_a, cleaned_text_b)
 
         self.tfidf[model_name] = similaridade_3 * 100
